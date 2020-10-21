@@ -17,32 +17,21 @@ function onAdd(){
   input.focus();
 }
 
-
+let id = 0;   //　現場ではUUIDなどの固有IDを使う。
 function createItem(text){
   const itemRow = document.createElement('ul');
   itemRow.setAttribute('class', 'item__row');
-
-  const item = document.createElement('li');
-  item.setAttribute('class', 'item');
-
-  const name = document.createElement('span');
-  name.setAttribute('class', 'item__name');
-  name.innerText = text;
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.setAttribute('class', 'btn__delete');
-  deleteBtn.innerHTML='<i class="fas fa-minus-circle"></i>';
-  deleteBtn.addEventListener('click', ()=>{
-    items.removeChild(itemRow);
-  })
-
-  item.appendChild(name);
-  item.appendChild(deleteBtn);
-
-  itemRow.appendChild(item);
-
+  itemRow.setAttribute('data-id', id);
+  itemRow.innerHTML = `
+  <li class="item">
+    <span class="item__name">${text}</span>
+      <button class="btn__delete">
+        <i class="fas fa-minus-circle" data-id=${id}></i>
+      </button>   
+  </li>
+  `;
+  id++;
   return itemRow;
-
 }
 
 addBtn.addEventListener('click', ()=>{
@@ -54,3 +43,11 @@ input.addEventListener('keypress', event => {
     onAdd();
   }
 })
+
+items.addEventListener('click', event => {
+  const id = event.target.dataset.id;
+  if(id){
+    const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
+    toBeDeleted.remove();
+    }
+  });
