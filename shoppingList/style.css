@@ -82,6 +82,9 @@ button {
   width: 100%;
   background-color: white;
   border-radius: 5px;
+  -webkit-box-shadow: 10px 10px 26px -12px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 10px 10px 26px -12px rgba(0, 0, 0, 0.35);
+  box-shadow: 10px 10px 26px -12px rgba(0, 0, 0, 0.35);
 }
 
 .item {
